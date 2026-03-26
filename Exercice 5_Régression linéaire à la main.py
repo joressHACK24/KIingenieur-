@@ -11,8 +11,8 @@ X = np.column_stack((np.ones(len(X_raw)),X_raw))
 #wenden wir die normale Gleichung, um w zu finden
 
 X_1 = np.dot(X.T, X)
-inverse_X_1 = np.linalg.inv(X_1)
-w = np.dot(inverse_X_1,np.dot(X.T, y))
+X_2 = np.dot(X.T, y)
+w = np.linalg.solve(X_1, X_2)
 
 print(w)
 # machen wir eine Prädiktion von 75 m2

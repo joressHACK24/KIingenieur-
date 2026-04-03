@@ -5,36 +5,38 @@ import pandas as pd
 import matplotlib.pyplot as plt
 
 
-# nehme ich die Datei der Nutzer ein
-parser = argparse.ArgumentParser("Lesen der Datei von der Nutzer")
-parser.add_argument("csv_file", help="Pfad zur Datei")
+def main():
+    print("Beginn der Statistikrechner")
+    # nehme ich die Datei der Nutzer ein
+    parser = argparse.ArgumentParser("Lesen der Datei von der Nutzer")
+    parser.add_argument("csv_file", help="Pfad zur Datei")
+    parser.add_argument('-c','--column',help="Name der Spalte, die wir nutzen wollen") 
 
-try:
-    args = parser.parse_args()
-except FileNotFoundError:
-    print("Ihre Datei ist nicht gefunden ")
-except NameError:
-    print( " Bitte geben sie ein csv-Datei")
-
-
-# muss ich jetzt eine Spalte auswählen und die Mittelwert, Varianz und median rechnen
-
-Daten = pd.read_csv(args.csv_file, sep=';')
+    try:
+        args = parser.parse_args()
+    except FileNotFoundError:
+        print("Ihre Datei ist nicht gefunden ")
+    except NameError:
+        print( " Bitte geben sie ein csv-Datei")
 
 
+    # muss ich jetzt eine Spalte auswählen und die Mittelwert, Varianz und median rechnen
 
-# On garde tout SAUF les colonnes de type 'object'
-Daten = Daten.select_dtypes(include=['number'])
+    Daten = pd.read_csv(args.csv_file, sep=';')
 
-print(Daten.head())
-for data in Daten.columns:
-    Mittelwert = np.mean(Daten[data])
-    Varianz = np.var(Daten[data])
-    Median  = np.median(Daten[data])
+    # wir bewahren nur die Datentyp-Integer
+    if Daten[args.column].dtype == "string":
+        print("Bitte ändern Sie Ihre Spalte: Sie enhält string-Elemente")
+    else:
+        Mittelwert = np.mean(Daten[args.column])
+        Varianz = np.var(Daten[args.column])
+        Median  = np.median(Daten[args.column])
 
-    plt.hist(Daten[data])
-    plt.savefig(f"hist_{data}")
-    print(f"Da sind die statistische Komponent der Spalte '{data}':\n Mittelwert {Mittelwert},\n Varianz {Varianz},\n Mediane {Median}\n")
+        plt.hist(Daten[args.column])
+        plt.savefig(f"hist_{args.column}")
+        print(f"Da sind die statistische Komponent der Spalte '{args.column}':\n Mittelwert {Mittelwert},\n Varianz {Varianz},\n Mediane {Median}\n")
 
 
+if __name__ == "__main__":
+    main()
 

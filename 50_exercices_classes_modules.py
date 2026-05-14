@@ -769,15 +769,15 @@ def normaliser(data: list[float]) -> list[float]:
 # Exercice 40
 # Crée une classe abstraite `Modele` avec les méthodes abstraites
 # `entrainer()` et `predire()`. Crée `ModeleLineaire` qui l'implémente.
-'''class Modele(ABC):
+'''class Modele("ABC"):
     @ABC
     def entrainer(self): pass
     @ABC
     def predire(self): pass
-'''
+
 class ModeleLineaire(Modele):
     def entrainer(self): print("Entraînement...")
-    def predire(self): print("Prédiction...")
+    def predire(self): print("Prédiction...")'''
 
 
 # ============================================================

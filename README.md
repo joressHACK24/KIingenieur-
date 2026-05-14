@@ -1,2 +1,0 @@
-﻿# KIingenieur-
- # Ceci correspond à tous les exercices que j'ai traité pour solidifier mes bases en mathematiques pour le machine learning
